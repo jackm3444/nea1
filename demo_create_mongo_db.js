@@ -1,8 +1,17 @@
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/mydb";
+const mongoose = require("mongoose")
 
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  console.log("Database created!");
-  db.close();
-});
+const MONGODB_URL = process.env 
+
+exports.connect = () => {
+  mongoose.connect(MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then()
+  .catch((error) => {
+    console.log("DB connection FAILED");
+    console.log(error);
+    process.exit(1)
+  })
+}
+// mongodb password = Password
